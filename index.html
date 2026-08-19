@@ -3931,34 +3931,8 @@ net::ERR_INTERNET_DISCONNECTED`)
   newIcon.rel = 'icon';
   newIcon.href = base64Icon;
   document.head.appendChild(newIcon);
-
-  // 3. 彻底删除 "No internet" 等提示文字 (JS 强制扫描并隐藏节点)
-  var badTexts = ["No internet", "Try:", "Checking the network", "Reconnecting to Wi-Fi", "ERR_INTERNET_DISCONNECTED"];
-  function nukeBadText() {
-    // 兜底隐藏已知的提示框 ID
-    var mainMsg = document.getElementById('main-message');
-    if(mainMsg) mainMsg.style.display = 'none';
-    var details = document.getElementById('details');
-    if(details) details.style.display = 'none';
-    
-    // 遍历所有文本节点，精准打击
-    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-    var node;
-    while(node = walker.nextNode()) {
-      var txt = node.textContent.trim();
-      if (txt && badTexts.some(function(bad) { return txt.indexOf(bad) !== -1; })) {
-        var parent = node.parentElement;
-        if (parent && !parent.querySelector('canvas') && parent.id !== 'dinoClock') {
-          var container = parent.closest('#main-message') || parent.closest('.interstitial-wrapper > div') || parent;
-          if(container && !container.querySelector('canvas')) {
-             container.style.display = 'none';
-          }
-        }
-      }
-    }
-  }
-
-  // 4. 顶部时间
+  
+  // 3. 顶部时间
   var clock = document.getElementById("dinoClock");
   function pad(n){return (n<10?"0":"")+n;}
   function tick(){
