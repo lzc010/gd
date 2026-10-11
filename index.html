@@ -3942,10 +3942,6 @@ net::ERR_INTERNET_DISCONNECTED`)
   tick();
   setInterval(tick, 1000);
 
-  // 延迟执行清理，确保 Chrome 离线页面的动态 DOM 已经生成
-  setTimeout(nukeBadText, 100);
-  setTimeout(nukeBadText, 500);
-  setTimeout(nukeBadText, 1500);
 })();
 </script>
 <!-- ========== 补丁结束 ========== -->  </body>
